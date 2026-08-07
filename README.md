@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Celeste Hedequist Environmental
 
-## Getting Started
+Independent environmental journalism site built with Next.js (App Router) and Tailwind CSS. Content is currently served from a typed mock data layer shaped for a future Sanity CMS.
 
-First, run the development server:
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## What's included
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Home with featured investigation, category filter, and latest reporting grid
+- News & Articles, Topics, Archive, About, Contact, Subscribe
+- Individual article pages at `/articles/[slug]`
+- Shared header/footer matching the editorial design system
 
-## Learn More
+## Content & Sanity
 
-To learn more about Next.js, take a look at the following resources:
+Mock posts live in `src/lib/data.ts` with types in `src/lib/types.ts`. Schema notes for Post, Category, and Author are in `src/lib/sanity/schema-reference.ts`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To connect Sanity later:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Create a Sanity project and Studio
+2. Install `next-sanity` and `@sanity/image-url`
+3. Add project ID / dataset env vars
+4. Swap the accessors in `src/lib/data.ts` for GROQ queries via `src/lib/sanity/client.ts`
 
-## Deploy on Vercel
+## Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `npm run dev` — development server
+- `npm run build` — production build
+- `npm run start` — serve production build
+- `npm run lint` — ESLint
