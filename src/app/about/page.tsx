@@ -14,15 +14,12 @@ export default function AboutPage() {
       <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="animate-fade-up relative aspect-[4/5] overflow-hidden rounded-2xl lg:aspect-[5/6]">
           <Image
-            src={
-              author.image ??
-              "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80"
-            }
+            src={author.image ?? "/images/celeste-hedequist.jpg"}
             alt={author.name}
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
+            className="object-cover object-top"
           />
         </div>
 

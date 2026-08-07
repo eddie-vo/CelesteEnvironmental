@@ -6,8 +6,7 @@ export const author: Author = {
   slug: "celeste-hedequist",
   role: "Environmental Correspondent",
   bio: "Celeste Hedequist reports on climate policy, renewable energy, and the ecosystems that bind them together. Her work has appeared across national outlets and focuses on the people and places reshaping how we live with a changing planet.",
-  image:
-    "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80",
+  image: "/images/celeste-hedequist.jpg",
 };
 
 export const categories: Category[] = [
