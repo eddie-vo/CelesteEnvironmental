@@ -8,8 +8,9 @@ export function Footer() {
         <div className="sm:col-span-2 lg:col-span-1">
           <Logo />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
-            Independent environmental journalism on the policies, places, and
-            people reshaping our relationship with the planet.
+            Independent environmental journalism by Celeste Hedequist, MPH, on
+            the policies, places, and people reshaping our relationship with
+            the planet.
           </p>
         </div>
 

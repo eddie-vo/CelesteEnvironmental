@@ -4,21 +4,23 @@ import type { Post } from "@/lib/types";
 import { formatPostDate } from "@/lib/data";
 
 export function ArticleCard({ post }: { post: Post }) {
-  const category = post.categories[0];
+  const category = post.categories?.[0];
 
   return (
     <article className="group flex flex-col">
       <Link
         href={`/articles/${post.slug}`}
-        className="relative block aspect-[16/11] overflow-hidden rounded-2xl"
+        className="relative block aspect-[16/11] overflow-hidden rounded-2xl bg-sage/40"
       >
-        <Image
-          src={post.mainImage.url}
-          alt={post.mainImage.alt}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-        />
+        {post.mainImage?.url ? (
+          <Image
+            src={post.mainImage.url}
+            alt={post.mainImage.alt || post.title}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+          />
+        ) : null}
       </Link>
 
       <div className="mt-4 flex flex-1 flex-col">

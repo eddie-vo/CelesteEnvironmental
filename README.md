@@ -1,37 +1,67 @@
 # Celeste Hedequist Environmental
 
-Independent environmental journalism site built with Next.js (App Router) and Tailwind CSS. Content is currently served from a typed mock data layer shaped for a future Sanity CMS.
+Independent environmental journalism site built with Next.js (App Router), Tailwind CSS, Sanity CMS, and Cloudflare Workers (OpenNext).
 
 ## Getting started
 
 ```bash
+cp .env.example .env.local
 npm install
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
 
-## What's included
+## Sanity Studio (editors)
 
-- Home with featured investigation, category filter, and latest reporting grid
-- News & Articles, Topics, Archive, About, Contact, Subscribe
-- Individual article pages at `/articles/[slug]`
-- Shared header/footer matching the editorial design system
+Studio is **hosted separately** from the public site (keeps the Cloudflare Worker bundle under size limits).
 
-## Content & Sanity
+- **Production editors:** [https://celeste-environmental.sanity.studio](https://celeste-environmental.sanity.studio)
+- **Local Studio dev:** `npm run studio` (runs on port 3333)
+- **Deploy Studio updates:** `npm run studio:deploy`
 
-Mock posts live in `src/lib/data.ts` with types in `src/lib/types.ts`. Schema notes for Post, Category, and Author are in `src/lib/sanity/schema-reference.ts`.
+## Environment variables
 
-To connect Sanity later:
+```bash
+NEXT_PUBLIC_SANITY_PROJECT_ID=7369p9av
+NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_API_VERSION=2025-01-01
+NEXT_PUBLIC_SANITY_STUDIO_URL=https://celeste-environmental.sanity.studio
+```
 
-1. Create a Sanity project and Studio
-2. Install `next-sanity` and `@sanity/image-url`
-3. Add project ID / dataset env vars
-4. Swap the accessors in `src/lib/data.ts` for GROQ queries via `src/lib/sanity/client.ts`
+Set in `.env.local` before `npm run deploy`, and in Cloudflare Workers → Settings → Variables.
+
+## Sanity CORS
+
+In [sanity.io/manage](https://www.sanity.io/manage) → project `7369p9av` → API → CORS origins, allow:
+
+- `http://localhost:3000`
+- `http://localhost:3333` (local Studio)
+- `https://celesteenvironmental.eddievo.workers.dev`
+- `https://celeste-environmental.sanity.studio`
+
+## Editor workflow
+
+1. Open the hosted Studio URL and sign in with your Sanity account.
+2. Create an **Author**, then **Categories**, then **Posts**.
+3. Mark one post as **Featured investigation** for the homepage hero.
+4. Fill the **SEO** tab on posts for custom titles/descriptions/social images.
+5. Publish — the public site revalidates about every 60 seconds.
+
+## Deploy public site to Cloudflare Workers
+
+```bash
+npm run deploy
+```
+
+Live URL: `https://celesteenvironmental.eddievo.workers.dev`
 
 ## Scripts
 
-- `npm run dev` — development server
-- `npm run build` — production build
-- `npm run start` — serve production build
+- `npm run dev` — local Next.js site
+- `npm run studio` — local Sanity Studio (port 3333)
+- `npm run studio:deploy` — deploy hosted Studio
+- `npm run build` — production Next build
+- `npm run preview` — OpenNext local Workers preview
+- `npm run deploy` — build and deploy public site to Cloudflare Workers
 - `npm run lint` — ESLint

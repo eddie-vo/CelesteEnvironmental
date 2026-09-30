@@ -1,4 +1,7 @@
-/** Content types shaped to match a future Sanity schema. */
+import type { PortableTextBlock } from "@portabletext/types";
+import type { SanityImageSource } from "@sanity/image-url";
+
+/** Content types shaped to match Sanity schemas. */
 
 export type Author = {
   _id: string;
@@ -7,6 +10,9 @@ export type Author = {
   role?: string;
   bio?: string;
   image?: string;
+  imageAlt?: string;
+  sameAs?: string[];
+  knowsAbout?: string[];
 };
 
 export type Category = {
@@ -14,6 +20,8 @@ export type Category = {
   title: string;
   slug: string;
   description?: string;
+  seoTitle?: string;
+  seoDescription?: string;
 };
 
 export type PostImage = {
@@ -23,15 +31,20 @@ export type PostImage = {
 
 export type Post = {
   _id: string;
+  _updatedAt?: string;
   title: string;
   slug: string;
   excerpt: string;
-  mainImage: PostImage;
+  mainImage?: PostImage;
   publishedAt: string;
   readingTime: number;
   featured?: boolean;
-  categories: Category[];
-  author: Author;
-  /** Plain paragraphs for now; swap for Portable Text when Sanity is wired. */
-  body: string[];
+  categories?: Category[];
+  author?: Author;
+  body?: PortableTextBlock[];
+  seoTitle?: string;
+  seoDescription?: string;
+  ogImageUrl?: string;
+  ogImageSource?: SanityImageSource;
+  noIndex?: boolean;
 };

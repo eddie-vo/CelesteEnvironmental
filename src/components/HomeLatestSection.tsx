@@ -15,7 +15,7 @@ export function HomeLatestSection({ categories, posts }: Props) {
 
   const filtered = useMemo(() => {
     if (active === "all") return posts;
-    return posts.filter((p) => p.categories.some((c) => c.slug === active));
+    return posts.filter((p) => p.categories?.some((c) => c.slug === active));
   }, [active, posts]);
 
   return (
