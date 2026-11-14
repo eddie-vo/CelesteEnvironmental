@@ -1,8 +1,7 @@
 /** Canonical site identity used by metadata, JSON-LD, sitemap, and feeds. */
 
 const rawUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  "https://celesteenvironmental.eddievo.workers.dev";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://celestehedequistenv.com";
 
 export const siteConfig = {
   url: rawUrl.replace(/\/+$/, ""),
@@ -48,7 +47,14 @@ export const siteConfig = {
       "Environmental health",
       "Public health",
     ],
-    sameAs: [] as string[],
+    // Other profiles for the same person, so search engines connect them as one entity.
+    sameAs: [
+      "https://www.linkedin.com/in/celestehedequist",
+      "https://www.instagram.com/celeste_hedequist/",
+      "https://www.pinterest.com/celestehedequist/",
+      "https://celestehedequist.net",
+      "https://celestehedequist.com",
+    ] as string[],
   },
 } as const;
 

@@ -37,6 +37,7 @@ In [sanity.io/manage](https://www.sanity.io/manage) → project `7369p9av` → A
 
 - `http://localhost:3000`
 - `http://localhost:3333` (local Studio)
+- `https://celestehedequistenv.com`
 - `https://celesteenvironmental.eddievo.workers.dev`
 - `https://celeste-environmental.sanity.studio`
 
@@ -54,7 +55,7 @@ In [sanity.io/manage](https://www.sanity.io/manage) → project `7369p9av` → A
 npm run deploy
 ```
 
-Live URL: `https://celesteenvironmental.eddievo.workers.dev`
+Live URL: `https://celestehedequistenv.com` (workers.dev 301-redirects here)
 
 ## Scripts
 
