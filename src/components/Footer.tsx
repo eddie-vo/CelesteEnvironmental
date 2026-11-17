@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
+import { NETWORK } from "@/lib/network";
+import { siteConfig } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -76,6 +78,18 @@ export function Footer() {
         </div>
       </div>
 
+      <div className="border-t border-border">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-6 gap-y-2 px-5 py-4 text-sm lg:px-8">
+          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
+            Celeste Hedequist online
+          </span>
+          {NETWORK.filter((s) => s.url !== siteConfig.url).map((s) => (
+            <a key={s.url} href={`${s.url}/`} className="hover:text-forest">
+              {s.name.replace("Celeste Hedequist – ", "")}
+            </a>
+          ))}
+        </div>
+      </div>
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-5 text-xs text-muted sm:flex-row sm:items-center sm:justify-between lg:px-8">
           <p>© {new Date().getFullYear()} Celeste Hedequist Environmental</p>

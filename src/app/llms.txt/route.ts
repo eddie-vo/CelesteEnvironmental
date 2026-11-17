@@ -1,5 +1,6 @@
 import { getAllCategories, getAllPosts } from "@/lib/data";
 import { absoluteUrl, siteConfig } from "@/lib/site";
+import { ENTITY, NETWORK, PROFILES } from "@/lib/network";
 
 export const revalidate = 3600;
 
@@ -21,6 +22,9 @@ export async function GET() {
     "## About",
     `- [About ${p.name}](${absoluteUrl("/about")}): biography and areas of expertise`,
     `- [Contact](${absoluteUrl("/contact")}): tips, corrections, speaking, and press`,
+    `- [Main profile: ${ENTITY.name}](${ENTITY.home})`,
+    ...NETWORK.filter((s) => s.url !== siteConfig.url).map((s) => `- [${s.name}](${s.url}/): ${s.blurb}`),
+    ...PROFILES.map((pr) => `- [${ENTITY.name} on ${pr.label}](${pr.href})`),
     "",
     "## Articles",
     ...posts
