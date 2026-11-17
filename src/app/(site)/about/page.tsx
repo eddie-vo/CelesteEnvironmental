@@ -11,6 +11,7 @@ import {
   webPageNode,
 } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
+import { ENTITY, NETWORK, PROFILES } from "@/lib/network";
 
 const title = "About Celeste Hedequist, MPH — Environmental Journalist";
 const description =
@@ -89,6 +90,33 @@ export default async function AboutPage() {
               Tips, corrections, and conversation are always welcome. The best
               stories often start with a note from someone who saw something the
               rest of us missed.
+            </p>
+          </div>
+          <div className="mt-10 rounded-2xl border border-border bg-surface p-6">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
+              More from Celeste Hedequist
+            </h2>
+            <ul className="mt-4 space-y-3 text-sm">
+              {NETWORK.filter((s) => s.url !== siteConfig.url).map((s) => (
+                <li key={s.url}>
+                  <a href={`${s.url}/`} className="font-semibold text-foreground hover:text-forest">
+                    {s.name}
+                  </a>
+                  <span className="block text-muted">{s.blurb}</span>
+                </li>
+              ))}
+              <li>
+                <a href={ENTITY.home} className="font-semibold text-foreground hover:text-forest">
+                  Celeste Hedequist&apos;s main profile
+                </a>
+              </li>
+            </ul>
+            <p className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted">
+              {PROFILES.map((pr) => (
+                <a key={pr.href} href={pr.href} rel="me noopener" target="_blank" className="hover:text-forest">
+                  {pr.label}
+                </a>
+              ))}
             </p>
           </div>
           <div className="mt-10 flex flex-wrap gap-3">

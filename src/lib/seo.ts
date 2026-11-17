@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { PortableTextBlock } from "@portabletext/types";
 import { croppedImageUrl } from "./sanity/image";
 import { absoluteUrl, cleanPersonName, siteConfig } from "./site";
+import { ENTITY, SAME_AS } from "./network";
 import type { Author, Post } from "./types";
 
 type OgImage = { url: string; width?: number; height?: number; alt?: string };
@@ -101,7 +102,8 @@ export function postOgImages(post: Post): OgImage[] {
 type Node = Record<string, unknown>;
 
 export const schemaIds = {
-  person: absoluteUrl("/#person"),
+  // Shared across all of Celeste's sites so search engines merge them into one entity.
+  person: ENTITY.id,
   organization: absoluteUrl("/#organization"),
   website: absoluteUrl("/#website"),
 };
@@ -119,7 +121,9 @@ function unique(values: (string | undefined)[]): string[] {
 
 export function personNode(author?: Author): Node {
   const p = siteConfig.person;
-  const sameAs = unique([...(author?.sameAs ?? []), ...p.sameAs]);
+  const sameAs = unique([...(author?.sameAs ?? []), ...p.sameAs, ...SAME_AS]).filter(
+    (u) => !u.startsWith(siteConfig.url),
+  );
   return {
     "@type": "Person",
     "@id": schemaIds.person,
@@ -127,7 +131,10 @@ export function personNode(author?: Author): Node {
     givenName: "Celeste",
     familyName: "Hedequist",
     honorificSuffix: p.honorificSuffix,
-    url: absoluteUrl("/about"),
+    url: ENTITY.home,
+    mainEntityOfPage: ENTITY.home,
+    homeLocation: { "@type": "Place", name: ENTITY.homeLocation },
+    alumniOf: { "@type": "CollegeOrUniversity", name: ENTITY.alumniOf.name, url: ENTITY.alumniOf.url },
     image: {
       "@type": "ImageObject",
       "@id": absoluteUrl("/#personimage"),
